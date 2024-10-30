@@ -24,7 +24,9 @@ while True:  # run forever -> keeps our game running
     # draw the surface on the display surface
     display_surface.fill((95, 191, 167))
     test_surface.fill((182, 62, 111))
-    display_surface.blit(test_surface, (0, 0))
+    # place the surface
+    display_surface.blit(test_surface, (WINDOW_WIDTH -
+                         test_surface.get_width(), 100))
 
     # 3. show the frame to the player / update the display surface
     pygame.display.update()
