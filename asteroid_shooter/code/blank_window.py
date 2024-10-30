@@ -6,8 +6,10 @@ WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 pygame.display.set_caption('asteroid shooter')
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
+# importing images
+ship_surf = pygame.image.load('ship.png')
 # create a surface
-test_surface = pygame.Surface((400, 100))
+test_surface = pygame.Surface((200, 100))
 # we need to attach the surface to the display surface
 
 
@@ -22,11 +24,7 @@ while True:  # run forever -> keeps our game running
 
     # 2. updates
     # draw the surface on the display surface
-    display_surface.fill((95, 191, 167))
-    test_surface.fill((182, 62, 111))
-    # place the surface
-    display_surface.blit(test_surface, (WINDOW_WIDTH -
-                         test_surface.get_width(), 100))
+    display_surface.fill((0, 0, 0))
 
     # 3. show the frame to the player / update the display surface
     pygame.display.update()
