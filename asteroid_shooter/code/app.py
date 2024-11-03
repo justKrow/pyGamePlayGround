@@ -6,11 +6,16 @@ WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 pygame.display.set_caption('asteroid shooter')
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
+clock = pygame.time.Clock()
+
 # importing images
 ship_surf = pygame.image.load(
     '../graphics/ship.png').convert_alpha()
+ship_y_pos = 500
+
+# importing background image
 background_surf = pygame.image.load(
-    '../graphics/background.png').convert_alpha()
+    '../graphics/background.png').convert()
 
 # import text
 font = pygame.font.Font('../graphics/subatomic.ttf', 50)
@@ -30,11 +35,26 @@ while True:  # run forever -> keeps our game running
             pygame.quit()
             sys.exit()
 
+    # framerate limit
+    clock.tick(120)  # limit the frame rate to 60 frames per second
+
     # 2. updates
     # draw the surface on the display surface
     display_surface.fill((0, 0, 0))
     display_surface.blit(background_surf, (0, 0))
-    display_surface.blit(ship_surf, (300, 500))
+    ship_y_pos -= 4
+    display_surface.blit(ship_surf, (300, ship_y_pos))
+    display_surface.blit(text_surf, (500, 200))
+
+    # 3. show the frame to the player / update the display surface
+    pygame.display.update()
+
+    # 2. updates
+    # draw the surface on the display surface
+    display_surface.fill((0, 0, 0))
+    display_surface.blit(background_surf, (0, 0))
+    ship_y_pos -= 1
+    display_surface.blit(ship_surf, (300, ship_y_pos))
     display_surface.blit(text_surf, (500, 200))
 
     # 3. show the frame to the player / update the display surface
