@@ -12,6 +12,10 @@ clock = pygame.time.Clock()
 ship_surf = pygame.image.load(
     '../graphics/ship.png').convert_alpha()
 ship_rect = ship_surf.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
+
+laser_surf = pygame.image.load('../graphics/laser.png').convert_alpha()
+laser_rect = laser_surf.get_rect(midbottom=(ship_rect.midtop))
+
 # importing background image
 background_surf = pygame.image.load(
     '../graphics/background.png').convert()
@@ -21,41 +25,26 @@ font = pygame.font.Font('../graphics/subatomic.ttf', 50)
 text_surf = font.render('Space', True, 'white')
 text_rect = text_surf.get_rect(midbottom=(
     WINDOW_WIDTH // 2, WINDOW_HEIGHT - 80))
-
-# create a surface
 test_surface = pygame.Surface((200, 100))
-# we need to attach the surface to the display surface
 
-while True:  # run forever -> keeps our game running
-    # Do not run the code until i tell you
-
-    # 1. input -> events (mouse click, mouse movement, press of a button, controller or touchscreen)
+while True:
+    # event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
 
-        # if event.type == pygame.MOUSEMOTION:
-        #    ship_rect.center = event.pos
-
-        # if event.type == pygame.MOUSEBUTTONDOWN:
-        #    print(event.pos)
-
     # framerate limit
     clock.tick(120)  # limit the frame rate to 60 frames per second
-
-    # mouse input
-    # print(pygame.mouse.get_pos())  # get the current mouse position
-    # get the current state of the mouse buttons
-    # print(pygame.mouse.get_pressed())
-    ship_rect.center = pygame.mouse.get_pos()
+    # ship_rect.center = pygame.mouse.get_pos()
 
     # 2. updates
-    # draw the surface on the display surface
+    laser_rect.y -= 3
     display_surface.fill((0, 0, 0))
     display_surface.blit(background_surf, (0, 0))
     display_surface.blit(ship_surf, ship_rect)
     display_surface.blit(text_surf, text_rect)
+    display_surface.blit(laser_surf, laser_rect)
 
     # 3. show the frame to the player / update the display surface
     pygame.display.update()
