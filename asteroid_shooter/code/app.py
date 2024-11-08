@@ -12,7 +12,6 @@ clock = pygame.time.Clock()
 ship_surf = pygame.image.load(
     '../graphics/ship.png').convert_alpha()
 ship_rect = ship_surf.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
-
 # importing background image
 background_surf = pygame.image.load(
     '../graphics/background.png').convert()
@@ -27,7 +26,6 @@ text_rect = text_surf.get_rect(midbottom=(
 test_surface = pygame.Surface((200, 100))
 # we need to attach the surface to the display surface
 
-
 while True:  # run forever -> keeps our game running
     # Do not run the code until i tell you
 
@@ -37,16 +35,25 @@ while True:  # run forever -> keeps our game running
             pygame.quit()
             sys.exit()
 
+        # if event.type == pygame.MOUSEMOTION:
+        #    ship_rect.center = event.pos
+
+        # if event.type == pygame.MOUSEBUTTONDOWN:
+        #    print(event.pos)
+
     # framerate limit
     clock.tick(120)  # limit the frame rate to 60 frames per second
+
+    # mouse input
+    # print(pygame.mouse.get_pos())  # get the current mouse position
+    # get the current state of the mouse buttons
+    # print(pygame.mouse.get_pressed())
+    ship_rect.center = pygame.mouse.get_pos()
 
     # 2. updates
     # draw the surface on the display surface
     display_surface.fill((0, 0, 0))
     display_surface.blit(background_surf, (0, 0))
-    if ship_rect.y > 0:
-        # print(ship_rect.y)
-        ship_rect.y -= 4
     display_surface.blit(ship_surf, ship_rect)
     display_surface.blit(text_surf, text_rect)
 
