@@ -106,6 +106,23 @@ while True:
     pygame.time.get_ticks()
     laser_update(laser_list, 300)
     meteor_update(meteor_list, 300)
+
+    # collision
+    for meteor in meteor_list:
+        meteor_rect = meteor[0]
+        if ship_rect.colliderect(meteor_rect):
+            print('ship collided with meteor')
+            pygame.quit()
+            sys.exit()
+
+    for meteor in meteor_list:
+        meteor_rect = meteor[0]
+        for laser in laser_list:
+            if laser.colliderect(meteor_rect):
+                print('meteor collided with laser')
+                laser_list.remove(laser)
+                meteor_list.remove(meteor)
+
     display_surface.fill((0, 0, 0))
     display_surface.blit(background_surf, (0, 0))
     display_score()
