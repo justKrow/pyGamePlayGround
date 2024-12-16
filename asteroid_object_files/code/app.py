@@ -67,9 +67,23 @@ class Meteor(pygame.sprite.Sprite):
     def update(self):
         self.pos += self.direction * self.speed * dt
         self.rect.topleft = (
-            round(self.pos.x), round(self.pos.y))  # basic setup
+            round(self.pos.x), round(self.pos.y))
 
 
+class Score:
+    def __init__(self):
+        self.font = pygame.font.Font('../graphics/subatomic.ttf', 50)
+
+    def display(self):
+        score_text = f'Score: {pygame.time.get_ticks() // 1000}'
+        text_surf = self.font.render(score_text, True, 'White')
+        text_rect = text_surf.get_rect(midbottom=(
+            WINDOW_WIDTH / 2, WINDOW_HEIGHT - 80))
+        pygame.draw.rect(display_surface, 'White',
+                         text_rect.inflate(30, 30), width=8, border_radius=10)
+        display_surface.blit(text_surf, text_rect)
+
+     # basic setup
 pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -115,6 +129,7 @@ while True:
 
     # graphics
     spaceship_group.draw(display_surface)
+    Score().display()
     laser_group.draw(display_surface)
     meteor_group.draw(display_surface)
 
